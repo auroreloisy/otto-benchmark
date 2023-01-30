@@ -22,7 +22,7 @@ missing dependencies will be installed automatically.
 
 ### Conda users
 
-If you use conda to manage your Python environments, you can install OTTO in a dedicated environment `otto-benchmark`
+If you use conda to manage your Python environments, you can install OTTO-benchmark in a dedicated environment `otto-benchmark`
 
 ``` bash
 conda create --name otto-benchmark python=3.8
