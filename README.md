@@ -37,7 +37,7 @@ python3 setup.py install
 
 ## Downloading policies
 
-The policies computed using DRL, Sarsop and Perseus can be downloaded [here](ADDURL)  TODO
+The policies computed using DRL, Sarsop and Perseus can be downloaded [here](ADDURL)  TODO!!!
 
 Decompress the file and place the `zoo` folder at the root of OTTO-benchmark (at the same level as `isotropic`, `windy`, 
 and `converter-pbvi-to-otto` folders).
@@ -85,7 +85,7 @@ To change the policy, edit the `isotropic/evaluate/parameters/isotropic-19x19.py
 
 ### Learn
 
-To learn a DRL policy for isotropic-53x53 case, go to `isotropic/learn` and run
+To learn a DRL policy for "isotropic-53x53" case, go to `isotropic/learn` and run
 ```bash
 python3 learn.py -i isotropic-53x53
 ```

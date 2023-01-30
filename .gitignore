@@ -140,3 +140,4 @@ dmypy.json
 */evaluate/tmp/*
 */learn/models/*
 zoo
+zoo.tar.gz
