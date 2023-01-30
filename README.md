@@ -9,14 +9,8 @@ Refer to the original repository for tutorials and extensive documentation.
 
 New features:
 - a new "windy" setup has been added to the original "isotropic" one;
-- alpha-vector policies obtained from POMDP solvers Sarsop and Perseus can be loaded;
+- alpha-vector policies obtained from solvers using point-based value iteration (PBVI), namely Sarsop and Perseus, can be loaded;
 - CNN and reward shaping have been implemented in the "windy" setup (not used in the benchmark).
-
-The four test cases used in the benchmark are:
-- isotropic-19x19
-- isotropic-53x53
-- windy-medium-detections
-- windy-low-detections
 
 ## Installation
 
@@ -59,7 +53,13 @@ They organized in the exact same way. They contain three subdirectories:
 - `learn`: for **learning a DRL policy** for the task
 - `visualize`: for **visualizing a search** episode
 
-The code organization and usage is self-explanatory. It is illustrated below.
+The code organization and usage is self-explanatory. It is explained through examples below.
+
+The four test cases used in the benchmark are:
+- isotropic-19x19
+- isotropic-53x53
+- windy-medium-detections
+- windy-low-detections
 
 ### Visualize
 
@@ -90,4 +90,13 @@ To learn a DRL policy for isotropic-53x53 case, go to `isotropic/learn` and run
 python3 learn.py -i isotropic-53x53
 ```
 
-Change hyperparameters in the by editing the `isotropic/learn/parameters/isotropic-53x53.py` file.
+Change hyperparameters by editing the `isotropic/learn/parameters/isotropic-53x53.py` file.
+
+
+## Using new PBVI policies
+
+PVBI policies in the benchmark have been computed using [Sarsop](https://github.com/rheinonen/sarsop/) and a custom implementation of [Perseus](https://github.com/rheinonen/PerseusPOMDP/). 
+
+The policies obtained from these solvers can be used by `OTTO-benchmark` after conversion. For that, go to the folder `converter-pbvi-to-otto`, edit the file `convert_perseus_file.py` or `convert_sarsop_file.py` to set the correct paths at the beginning of the file, and run it.
+
+There is no need to convert the policies that are [downloadable](https://github.com/auroreloisy/otto-benchmark#downloading-policies).
