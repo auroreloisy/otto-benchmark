@@ -52,6 +52,9 @@ class RLPolicy(Policy):
         self.model = model
         self.sym_avg = sym_avg
 
+        self.policy_name = self.policy_name  # + \
+                           # " (discount=" + str(self.model.discount) + ", shaping=" + self.model.shaping + ")"
+
     def _choose_action(self, ):
 
         if self.policy_index == -1:
@@ -74,6 +77,7 @@ class RLPolicy(Policy):
 
         inputs = [0] * self.env.Nactions
         probs = [0] * self.env.Nactions
+        shaping = np.zeros(self.env.Nactions)
         ishape = self.env.NN_input_shape
 
         for action in range(self.env.Nactions):
@@ -96,6 +100,11 @@ class RLPolicy(Policy):
                 input = self.env._centeragent(p_source_[h] / prob, agent_)
                 probs[action].append(prob)
                 inputs[action].append(input)
+                shaping[action] += prob * self.env.shaping(
+                    which=self.model.shaping,
+                    p_source=p_source_[h] / prob,
+                    agent=agent_
+                )  # action-dependent term in the shaped reward
 
         inputs = np.asarray(inputs, dtype=np.float32)  # (Nactions, Nhits, inputshape)
         probs = np.asarray(probs, dtype=np.float32)  # (Nactions, Nhits)
@@ -113,9 +122,21 @@ class RLPolicy(Policy):
         assert values_next.shape == tuple([self.env.Nactions] + [self.env.Nhits])
         assert values_next.shape == probs.shape
 
-        expected_value = 1.0 + tf.math.reduce_sum(probs * values_next, axis=1)  # sum over hits: (Nactions)
+        expected_value = self.model.discount * tf.math.reduce_sum(probs * values_next, axis=1)  # sum over hits: (Nactions)
         assert expected_value.shape == tuple([self.env.Nactions])
 
-        action_chosen = np.argwhere(np.abs(expected_value - np.min(expected_value)) < EPSILON_CHOICE).flatten()[0]
+        # reward (1.0 for all actions, unless shaped)
+        rewards = (
+                1.0
+                + self.model.discount * shaping
+                - self.env.shaping(which=self.model.shaping, p_source=self.env.p_source, agent=self.env.agent)
+        )
 
-        return action_chosen, expected_value.numpy()
+        assert rewards.shape == tuple([self.env.Nactions])
+
+        expected_value = rewards + expected_value.numpy()
+
+        # action_chosen = np.argwhere(np.abs(expected_value - np.min(expected_value)) < EPSILON_CHOICE).flatten()[0]
+        action_chosen = np.argmin(expected_value)
+
+        return action_chosen, expected_value

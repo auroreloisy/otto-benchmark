@@ -6,6 +6,8 @@ R_DT = 2.0  # dimensionless source intensity
 # Neural network (NN) architecture
 FC_LAYERS = 3  # number of hidden layers
 FC_UNITS = 1024  # number of units per layers
+# Learning rate for stochastic gradient descent
+LEARNING_RATE = 0.001
 # Experience replay
 MEMORY_SIZE = 1000  # number of transitions (s, s') to keep in memory
 # Exploration: eps is the probability of taking a random action when executing the policy

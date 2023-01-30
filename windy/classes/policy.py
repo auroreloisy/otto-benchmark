@@ -15,6 +15,8 @@ def policy_name(policy_index):
         name = "space-aware infotaxis"
     elif policy_index == 2:
         name = "custom policy"
+    elif policy_index == 4:
+        name = "p-over-d"
     elif policy_index == 5:
         name = "random walk"
     elif policy_index == 6:

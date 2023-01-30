@@ -126,8 +126,8 @@ class AlphaVecPolicy(Policy):
         self.policy_name = self.solver
 
         self.policy_long_name = self.solver + \
-                                " (alphas=" + str(len(self.vf.alphas)) + \
-                                ", n_weights=" + str(np.prod(self.vf.alpha_array.shape)) + ")"
+                           " (alphas=" + str(len(self.vf.alphas)) + \
+                           ", n_weights=" + str(np.prod(self.vf.alpha_array.shape)) + ")"
 
     def _choose_action(self, ):
 

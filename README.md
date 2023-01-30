@@ -2,13 +2,27 @@
 # OTTO-benchmark
 
 This is a fork of [OTTO](https://github.com/C0PEP0D/otto) used for benchmarking
-solvers on the olfactory search POMDP.
+solvers on the olfactory search POMDP in the paper "Deep reinforcement learning for the olfactory search POMDP: a quantitative benchmark", by Aurore Loisy and Robin A. Heinonen (submitted).
+
+
+Refer to the original repository for tutorials and extensive documentation.
+
+New features:
+- a new "windy" setup has been added to the original "isotropic" one;
+- alpha-vector policies obtained from POMDP solvers Sarsop and Perseus can be loaded;
+- CNN and reward shaping have been implemented in the "windy" setup (not used in the benchmark).
+
+The four test cases used in the benchmark are:
+- isotropic-19x19
+- isotropic-53x53
+- windy-medium-detections
+- windy-low-detections
 
 ## Installation
 
 ### Requirements
 
-OTTO requires Python 3.8 or greater.
+OTTO-benchmark requires Python 3.8 or greater.
 Dependencies are listed in [requirements.txt](https://github.com/C0PEP0D/otto/blob/main/requirements.txt),
 missing dependencies will be installed automatically.
 
@@ -27,11 +41,53 @@ conda activate otto-benchmark
 python3 setup.py install
 ```
 
-## Training
+## Downloading policies
 
-Go to the `otto/learn` directory and train the NN using
-``` bash
-python3 learn.py -i param.py
+The policies computed using DRL, Sarsop and Perseus can be downloaded [here](ADDURL)  TODO
+
+Decompress the file and place the `zoo` folder at the root of OTTO-benchmark (at the same level as `isotropic`, `windy`, 
+and `converter-pbvi-to-otto` folders).
+
+
+
+## Usage
+
+The software contains 2 main directories, "isotropic" and "windy", containing the 2 variants of the POMDP.
+They organized in the exact same way. They contain three subdirectories:
+
+- `evaluate`: for **evaluating the performance** of a policy
+- `learn`: for **learning a DRL policy** for the task
+- `visualize`: for **visualizing a search** episode
+
+The code organization and usage is self-explanatory. It is illustrated below.
+
+### Visualize
+
+To visualize a search for the "windy-medium-detections" case, go to `windy/visualize` and run
+
+```bash
+python3 visualize.py -i windy-medium-detections
 ```
-where `param.py` is the name of a parameter file located in the `parameters` directory.
 
+The policy is selected by modifying the variable `POLICY` in the file 
+`windy/visualize/parameters/windy-medium-detections.py` 
+and, if needed, setting the path to the desired policy.
+
+### Evaluate
+
+To evaluate a policy for the "isotropic-19x19", go to `isotropic/evaluate` and run
+
+```bash
+python3 evaluate.py -i isotropic-19x19
+```
+
+To change the policy, edit the `isotropic/evaluate/parameters/isotropic-19x19.py` file as done above for the visualization.
+
+### Learn
+
+To learn a DRL policy for isotropic-53x53 case, go to `isotropic/learn` and run
+```bash
+python3 learn.py -i isotropic-53x53
+```
+
+Change hyperparameters in the by editing the `isotropic/learn/parameters/isotropic-53x53.py` file.
