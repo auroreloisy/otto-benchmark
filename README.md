@@ -37,7 +37,7 @@ python3 setup.py install
 
 ## Downloading policies
 
-The policies computed using DRL, Sarsop and Perseus can be downloaded [here](ADDURL)  TODO!!!
+The policies computed using DRL, Sarsop and Perseus can be downloaded [here](https://doi.org/10.5281/zenodo.7586357).
 
 Decompress the file and place the `zoo` folder at the root of OTTO-benchmark (at the same level as `isotropic`, `windy`, 
 and `converter-pbvi-to-otto` folders).
