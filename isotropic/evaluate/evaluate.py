@@ -614,13 +614,15 @@ def run():
         # compute stats of number of steps and number of hits
         t_bins = np.arange(BIN_START_T, BIN_END_T, BIN_SIZE_T) + 0.5 * BIN_SIZE_T
         mean_t, sigma_t, skew_t, kurt_t, p_found = stats_from_pdf(t_bins, pdf_t_tot)
+        if 1.0 - p_found <= STOP_p:
+            p_found = 1.0
         p25_t, p50_t, p75_t, p90_t, p95_t, p99_t, _ = stats_from_cdf(t_bins, cdf_t_tot)
 
         h_bins = np.arange(BIN_START_H, BIN_END_H, BIN_SIZE_H) + 0.5 * BIN_SIZE_H
         mean_h, sigma_h, skew_h, kurt_h, _ = stats_from_pdf(h_bins, pdf_h_tot)
         p25_h, p50_h, p75_h, p90_h, p95_h, p99_h, _ = stats_from_cdf(h_bins, cdf_h_tot)
 
-        print("probability that the source is never found              : %.10f" % (1.0 - p_found, ))
+        print("probability that the source is never found              : %.6f" % (1.0 - p_found, ))
         print("mean number of steps to find the source                 : %.3f +/- %.3f" % (mean_t, 1.96 * std_error_mean))
         print("number of steps to find the source with 50 %% probability: %.3f" % p50_t)
         print("number of steps to find the source with 99 %% probability: %.3f" % p99_t)
