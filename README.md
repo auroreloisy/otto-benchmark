@@ -2,7 +2,7 @@
 # OTTO-benchmark
 
 This is a fork of [OTTO](https://github.com/C0PEP0D/otto) used for benchmarking
-solvers on the olfactory search POMDP in the paper "Deep reinforcement learning for the olfactory search POMDP: a quantitative benchmark", by Aurore Loisy and Robin A. Heinonen ([submitted](https://arxiv.org/abs/2302.00706)).
+solvers on the olfactory search POMDP in the paper "Deep reinforcement learning for the olfactory search POMDP: a quantitative benchmark", by Aurore Loisy and Robin A. Heinonen ([The European Physical Journal, 2023](https://doi.org/10.1140/epje/s10189-023-00277-8)).
 
 
 Refer to the original repository for tutorials and extensive documentation.
