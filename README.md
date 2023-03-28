@@ -100,3 +100,26 @@ PVBI policies in the benchmark have been computed using [Sarsop](https://github.
 The policies obtained from these solvers can be used by `OTTO-benchmark` after conversion. For that, go to the folder `converter-pbvi-to-otto`, edit the file `convert_perseus_file.py` or `convert_sarsop_file.py` to set the correct paths at the beginning of the file, and run it.
 
 There is no need to convert the policies that are [downloadable](https://github.com/auroreloisy/otto-benchmark#downloading-policies).
+
+
+
+## How to cite OTTO?
+
+If you use this software in your publications, you can cite the package as follows:
+
+> Loisy, A. and Eloy, C. (2022). OTTO: A Python package to simulate, solve and visualize the source-tracking POMDP. Journal of Open Source Software, 7(74), 4266, https://doi.org/10.21105/joss.04266
+
+or if you use LaTeX:
+
+```tex
+@article{otto, 
+ doi = {10.21105/joss.04266}, 
+ year = {2022},
+ volume = {7}, 
+ number = {74}, 
+ pages = {4266}, 
+ author = {Loisy, A. and Eloy, C.}, 
+ title = {OTTO: A Python package to simulate, solve and visualize the source-tracking POMDP}, 
+ journal = {Journal of Open Source Software} 
+}  
+```
